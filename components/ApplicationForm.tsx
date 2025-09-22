@@ -6,7 +6,7 @@ const ArrowRightIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5
       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
     </svg>
 );
-  
+ 
 const InputField: React.FC<{ id: string; label: string; type: string; placeholder: string; required?: boolean; icon?: React.ReactNode }> = ({ id, label, type, placeholder, required, icon }) => (
     <div>
       <label htmlFor={id} className="flex items-center text-sm font-medium text-slate-600 mb-2">
@@ -62,21 +62,37 @@ const SelectField: React.FC<{ id: string; label: string; required?: boolean; chi
             {children}
         </select>
     </div>
+
 );
 
 const ApplicationForm: React.FC = () => {
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setSubmitted(true);
-    };
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.currentTarget as HTMLFormElement);
+
+        // Supondo que você tenha um estado chamado formData
+        const response = await fetch(import.meta.env.VITE_API_URL, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(Object.fromEntries(formData)),
+        });
+        console.log(Object.fromEntries(formData));
+        // Trate a resposta conforme necessário
+        if (response.ok) {
+            setSubmitted(true);
+        }
+    }; // <-- The missing curly brace `}` was added here.
 
     return (
         <section id="apply" className="py-20 md:py-28 bg-white">
             <div className="container mx-auto px-6">
                 <div className="text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Candidate-se Agora</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Entre na lista de espera Agora</h2>
                     <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
                         Preencha o formulário abaixo e comece a destravar sua ideia hoje mesmo
                     </p>
@@ -114,14 +130,15 @@ const ApplicationForm: React.FC = () => {
                         <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 text-sm text-slate-600">
                             <h4 className="font-semibold text-slate-800 mb-2">Próximos passos:</h4>
                             <ol className="list-decimal list-inside space-y-1">
+                                <li>Você sera o primeiro a ser notificado do lançamento</li>
                                 <li>Você receberá um e-mail com o link de pagamento (R$ 29,90).</li>
                                 <li>Após o pagamento, conectaremos você com o mentor ideal.</li>
-                                <li>Vocês agendam a conversa de 30 minutos por e-mail.</li>
+                                <li>Vocês agendam a conversa de 30 minutos por e-mail / Whatsapp / linkedIn.</li>
                             </ol>
                         </div>
                         
                         <button type="submit" className="w-full flex justify-center items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-                            Enviar Candidatura
+                            Entrar para a lista de espera
                             <ArrowRightIcon />
                         </button>
                     </form>

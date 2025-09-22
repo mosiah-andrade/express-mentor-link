@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
         </p>
         <div className="mt-8 border-t border-slate-200 pt-8">
           <p className="text-sm text-slate-500">
-            © 2024 Mentoria Expressa. Todos os direitos reservados.
+            © 2025 Mentoria Expressa. Todos os direitos reservados.
           </p>
         </div>
       </div>

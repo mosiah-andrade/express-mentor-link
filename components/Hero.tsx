@@ -28,12 +28,12 @@ const Hero: React.FC = () => {
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="#apply" className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-              Quero Destravar Minha Ideia Agora
+              Entre para a lista de espera
               <ArrowRightIcon />
             </a>
             <div className="flex items-center gap-2 text-sm text-slate-500">
               <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-              <span>Apenas R$ 29,90 • Resultado em 24h</span>
+              <span>Apenas R$ 29,90 • Resultado em 24h (para os primeiros usuarios)</span>
             </div>
         </div>
         <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
